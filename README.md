@@ -1,7 +1,7 @@
 # ruby-dev-test-1
 
 # FFstorage
-Aplicação feita em Ruby on Rails que gera as dietas e um acompanhamento gráfico da evolução do peso de um usuário. Cada usuário só poderá ver suas dietas. 
+Aplicação feita em Ruby on Rails que gera o armazenamento de arquivos e pasta.
 
 ## Desáfio
 
