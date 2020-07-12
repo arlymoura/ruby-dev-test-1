@@ -1,0 +1,111 @@
+DEPRECATION WARNING: Using `bin/rake routes` is deprecated and will be removed in Rails 6.1. Use `bin/rails routes` instead.
+ (called from block in execute at /home/arlymoura/.rvm/rubies/ruby-2.7.0/lib/ruby/gems/2.7.0/gems/rake-13.0.1/lib/rake/task.rb:281)
+  [1m[35m (494.2ms)[0m  [1m[35mCREATE DATABASE "FFStorage_development" ENCODING = 'unicode'[0m
+  [1m[35m (262.1ms)[0m  [1m[35mCREATE DATABASE "FFStorage_test" ENCODING = 'unicode'[0m
+  [1m[35m (23.2ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (11.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(6779635158253671315)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateFolders (20200711215401)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (10.7ms)[0m  [1m[35mCREATE TABLE "folders" ("id" bigserial primary key, "name" character varying, "parent_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_58e285f76e"
+FOREIGN KEY ("parent_id")
+  REFERENCES "parents" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(6779635158253671315)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (119.6ms)[0m  [1m[35mDROP DATABASE IF EXISTS "FFStorage_development"[0m
+  [1m[35m (116.5ms)[0m  [1m[35mDROP DATABASE IF EXISTS "FFStorage_test"[0m
+  [1m[35m (264.7ms)[0m  [1m[35mCREATE DATABASE "FFStorage_development" ENCODING = 'unicode'[0m
+  [1m[35m (263.4ms)[0m  [1m[35mCREATE DATABASE "FFStorage_test" ENCODING = 'unicode'[0m
+  [1m[35m (14.5ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (8.5ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(6779635158253671315)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateFolders (20200711215401)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (7.6ms)[0m  [1m[35mCREATE TABLE "folders" ("id" bigserial primary key, "name" character varying, "parent_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE  INDEX  "index_folders_on_parent_id" ON "folders"  ("parent_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200711215401"]]
+  [1m[35m (1.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateFolderFiles (20200711215455)
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (8.1ms)[0m  [1m[35mCREATE TABLE "folder_files" ("id" bigserial primary key, "name" character varying, "role" character varying, "folder_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_6d7fbfdb1d"
+FOREIGN KEY ("folder_id")
+  REFERENCES "folders" ("id")
+)[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE  INDEX  "index_folder_files_on_folder_id" ON "folder_files"  ("folder_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200711215455"]]
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (1.0ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-07-12 02:08:08.459988"], ["updated_at", "2020-07-12 02:08:08.459988"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(6779635158253671315)[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mFolder Load (1.3ms)[0m  [1m[34mSELECT "folders".* FROM "folders" ORDER BY "folders"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mFolder Load (0.9ms)[0m  [1m[34mSELECT "folders".* FROM "folders" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFolder Create (1.4ms)[0m  [1m[32mINSERT INTO "folders" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "/home"], ["created_at", "2020-07-12 02:24:50.964193"], ["updated_at", "2020-07-12 02:24:50.964193"]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFolder Create (0.5ms)[0m  [1m[32mINSERT INTO "folders" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "/var"], ["created_at", "2020-07-12 02:26:39.418852"], ["updated_at", "2020-07-12 02:26:39.418852"]]
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mFolder Load (0.8ms)[0m  [1m[34mSELECT "folders".* FROM "folders" ORDER BY "folders"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mFolder Load (0.7ms)[0m  [1m[34mSELECT "folders".* FROM "folders" ORDER BY "folders"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFolder Create (0.7ms)[0m  [1m[32mINSERT INTO "folders" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "teste_var"], ["created_at", "2020-07-12 02:27:33.847833"], ["updated_at", "2020-07-12 02:27:33.847833"]]
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mFolder Load (0.9ms)[0m  [1m[34mSELECT "folders".* FROM "folders" ORDER BY "folders"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mFolder Load (0.3ms)[0m  [1m[34mSELECT "folders".* FROM "folders" WHERE "folders"."parent_id" = $1 LIMIT $2[0m  [["parent_id", 3], ["LIMIT", 11]]
+  [1m[36mFolder Load (0.7ms)[0m  [1m[34mSELECT "folders".* FROM "folders" ORDER BY "folders"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mFolder Load (0.4ms)[0m  [1m[34mSELECT "folders".* FROM "folders" ORDER BY "folders"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFolder Destroy (2.3ms)[0m  [1m[31mDELETE FROM "folders" WHERE "folders"."id" = $1[0m  [["id", 3]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mFolder Load (0.3ms)[0m  [1m[34mSELECT "folders".* FROM "folders" ORDER BY "folders"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFolder Create (0.4ms)[0m  [1m[32mINSERT INTO "folders" ("name", "parent_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "teste_var"], ["parent_id", 2], ["created_at", "2020-07-12 02:30:04.706973"], ["updated_at", "2020-07-12 02:30:04.706973"]]
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mFolder Load (0.7ms)[0m  [1m[34mSELECT "folders".* FROM "folders" ORDER BY "folders"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mFolder Load (0.3ms)[0m  [1m[34mSELECT "folders".* FROM "folders" WHERE "folders"."parent_id" = $1 LIMIT $2[0m  [["parent_id", 4], ["LIMIT", 11]]
+  [1m[36mFolder Load (0.6ms)[0m  [1m[34mSELECT "folders".* FROM "folders" ORDER BY "folders"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFolder Destroy (0.5ms)[0m  [1m[31mDELETE FROM "folders" WHERE "folders"."id" = $1[0m  [["id", 4]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mFolder Load (0.3ms)[0m  [1m[34mSELECT "folders".* FROM "folders" ORDER BY "folders"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFolder Create (0.5ms)[0m  [1m[32mINSERT INTO "folders" ("name", "parent_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "teste_var"], ["parent_id", 2], ["created_at", "2020-07-12 02:31:40.620819"], ["updated_at", "2020-07-12 02:31:40.620819"]]
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mFolder Load (1.0ms)[0m  [1m[34mSELECT "folders".* FROM "folders" ORDER BY "folders"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mFolder Load (1.0ms)[0m  [1m[34mSELECT "folders".* FROM "folders" ORDER BY "folders"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mFolder Load (0.9ms)[0m  [1m[34mSELECT "folders".* FROM "folders" ORDER BY "folders"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mFolder Load (0.6ms)[0m  [1m[34mSELECT "folders".* FROM "folders" WHERE "folders"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mFolder Load (0.5ms)[0m  [1m[34mSELECT "folders".* FROM "folders" ORDER BY "folders"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mFolder Load (0.3ms)[0m  [1m[34mSELECT "folders".* FROM "folders" WHERE "folders"."parent_id" = $1 LIMIT $2[0m  [["parent_id", 5], ["LIMIT", 11]]
+  [1m[36mFolder Load (0.8ms)[0m  [1m[34mSELECT "folders".* FROM "folders" WHERE "folders"."parent_id" = $1 LIMIT $2[0m  [["parent_id", 2], ["LIMIT", 11]]
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "folders" WHERE "folders"."parent_id" = $1[0m  [["parent_id", 2]]
+  [1m[36mFolder Load (0.9ms)[0m  [1m[34mSELECT "folders".* FROM "folders" ORDER BY "folders"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mFolder Load (0.9ms)[0m  [1m[34mSELECT "folders".* FROM "folders" ORDER BY "folders"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mFolder Load (0.6ms)[0m  [1m[34mSELECT "folders".* FROM "folders" WHERE "folders"."parent_id" = $1 LIMIT $2[0m  [["parent_id", 5], ["LIMIT", 11]]
+  [1m[36mFolder Load (0.9ms)[0m  [1m[34mSELECT "folders".* FROM "folders" WHERE "folders"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mFolder Load (0.6ms)[0m  [1m[34mSELECT "folders".* FROM "folders" WHERE "folders"."parent_id" = $1 LIMIT $2[0m  [["parent_id", 2], ["LIMIT", 11]]
+  [1m[36mFolder Load (0.9ms)[0m  [1m[34mSELECT "folders".* FROM "folders" WHERE "folders"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mFolder Load (0.3ms)[0m  [1m[34mSELECT "folders".* FROM "folders" WHERE "folders"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mFolder Load (1.6ms)[0m  [1m[34mSELECT "folders".* FROM "folders" WHERE "folders"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mFolder Load (0.3ms)[0m  [1m[34mSELECT "folders".* FROM "folders" WHERE "folders"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mFolder Load (0.8ms)[0m  [1m[34mSELECT "folders".* FROM "folders" ORDER BY "folders"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mFolder Load (0.2ms)[0m  [1m[34mSELECT "folders".* FROM "folders" WHERE "folders"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mFolder Load (0.7ms)[0m  [1m[34mSELECT "folders".* FROM "folders" ORDER BY "folders"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mFolder Load (0.9ms)[0m  [1m[34mSELECT "folders".* FROM "folders" ORDER BY "folders"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mFolder Load (0.3ms)[0m  [1m[34mSELECT "folders".* FROM "folders" WHERE "folders"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mFolder Load (0.3ms)[0m  [1m[34mSELECT "folders".* FROM "folders" ORDER BY "folders"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mFolder Load (0.2ms)[0m  [1m[34mSELECT "folders".* FROM "folders" WHERE "folders"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mFolder Load (0.3ms)[0m  [1m[34mSELECT "folders".* FROM "folders" ORDER BY "folders"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mFolder Load (0.4ms)[0m  [1m[34mSELECT "folders".* FROM "folders" WHERE "folders"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mFolder Load (0.3ms)[0m  [1m[34mSELECT "folders".* FROM "folders" ORDER BY "folders"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mFolder Load (0.2ms)[0m  [1m[34mSELECT "folders".* FROM "folders" WHERE "folders"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mFolder Load (0.3ms)[0m  [1m[34mSELECT "folders".* FROM "folders" ORDER BY "folders"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mFolder Load (0.2ms)[0m  [1m[34mSELECT "folders".* FROM "folders" WHERE "folders"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]

@@ -1,0 +1,20 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  username: arlymoura
+  password: asm123456
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: FFStorage_development
+
+test:
+  <<: *default
+  database: FFStorage_test
+
+production:
+  <<: *default
+  database: FFStorage_production
+  username: FFStorage
+  password: <%= ENV['FFSTORAGE_DATABASE_PASSWORD'] %>
